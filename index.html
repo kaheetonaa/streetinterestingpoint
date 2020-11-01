@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script>L_PREFER_CANVAS=false; L_NO_TOUCH=false; L_DISABLE_3D=false;</script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.4.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>#map_9c8bb240b30c41b18aed2eb79c2d2dbd {
+        position: relative;
+        width: 100.0%;
+        height: 100.0%;
+        left: 0.0%;
+        top: 0.0%;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>    
+    
+    <div class="folium-map" id="map_9c8bb240b30c41b18aed2eb79c2d2dbd" ></div>
+</body>
+<script>    
+    
+    
+        var bounds = null;
+    
+
+    var map_9c8bb240b30c41b18aed2eb79c2d2dbd = L.map(
+        'map_9c8bb240b30c41b18aed2eb79c2d2dbd', {
+        center: [21, 105],
+        zoom: 5,
+        maxBounds: bounds,
+        layers: [],
+        worldCopyJump: false,
+        crs: L.CRS.EPSG3857,
+        zoomControl: true,
+        });
+
+
+    
+    var tile_layer_005e1bdea2474e16b9540a7a45ed5efb = L.tileLayer(
+        'https://api.mapbox.com/styles/v1/kuquanghuylcb/ckgx44i8u2ns719p9stqpn82p/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoia3VxdWFuZ2h1eWxjYiIsImEiOiJja2V2N2p1dzUyM2U1MnVvZXRiZng3MGZ2In0.x3o3FGwULH6OSeamjZxJ7Q',
+        {
+        "attribution": "Mapbox",
+        "detectRetina": false,
+        "maxNativeZoom": 18,
+        "maxZoom": 18,
+        "minZoom": 0,
+        "noWrap": false,
+        "opacity": 1,
+        "subdomains": "abc",
+        "tms": false
+}).addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+    
+    var color_map_7652440af5f24586b977e0b31981db17 = {};
+
+    
+    color_map_7652440af5f24586b977e0b31981db17.color = d3.scale.threshold()
+              .domain([0.0, 0.04809619238476954, 0.09619238476953908, 0.14428857715430862, 0.19238476953907815, 0.24048096192384769, 0.28857715430861725, 0.3366733466933868, 0.3847695390781563, 0.43286573146292584, 0.48096192384769537, 0.5290581162324649, 0.5771543086172345, 0.625250501002004, 0.6733466933867736, 0.7214428857715431, 0.7695390781563126, 0.8176352705410822, 0.8657314629258517, 0.9138276553106213, 0.9619238476953907, 1.0100200400801602, 1.0581162324649298, 1.1062124248496994, 1.154308617234469, 1.2024048096192386, 1.250501002004008, 1.2985971943887775, 1.346693386773547, 1.3947895791583167, 1.4428857715430863, 1.4909819639278556, 1.5390781563126252, 1.5871743486973948, 1.6352705410821644, 1.6833667334669338, 1.7314629258517034, 1.779559118236473, 1.8276553106212425, 1.8757515030060121, 1.9238476953907815, 1.971943887775551, 2.0200400801603204, 2.06813627254509, 2.1162324649298596, 2.164328657314629, 2.212424849699399, 2.2605210420841684, 2.308617234468938, 2.3567134268537075, 2.404809619238477, 2.4529058116232463, 2.501002004008016, 2.5490981963927855, 2.597194388777555, 2.6452905811623246, 2.693386773547094, 2.741482965931864, 2.7895791583166334, 2.837675350701403, 2.8857715430861726, 2.9338677354709417, 2.9819639278557113, 3.030060120240481, 3.0781563126252505, 3.12625250501002, 3.1743486973947896, 3.2224448897795592, 3.270541082164329, 3.3186372745490984, 3.3667334669338675, 3.414829659318637, 3.4629258517034067, 3.5110220440881763, 3.559118236472946, 3.6072144288577155, 3.655310621242485, 3.7034068136272547, 3.7515030060120242, 3.7995991983967934, 3.847695390781563, 3.8957915831663326, 3.943887775551102, 3.9919839679358717, 4.040080160320641, 4.0881763527054105, 4.13627254509018, 4.18436873747495, 4.232464929859719, 4.280561122244489, 4.328657314629258, 4.376753507014028, 4.424849699398798, 4.472945891783567, 4.521042084168337, 4.569138276553106, 4.617234468937876, 4.6653306613226455, 4.713426853707415, 4.761523046092185, 4.809619238476954, 4.857715430861724, 4.905811623246493, 4.953907815631262, 5.002004008016032, 5.050100200400801, 5.098196392785571, 5.1462925851703405, 5.19438877755511, 5.24248496993988, 5.290581162324649, 5.338677354709419, 5.386773547094188, 5.434869739478958, 5.482965931863728, 5.531062124248497, 5.579158316633267, 5.627254509018036, 5.675350701402806, 5.7234468937875755, 5.771543086172345, 5.819639278557114, 5.867735470941883, 5.915831663326653, 5.963927855711423, 6.012024048096192, 6.060120240480962, 6.108216432865731, 6.156312625250501, 6.2044088176352705, 6.25250501002004, 6.30060120240481, 6.348697394789579, 6.396793587174349, 6.4448897795591185, 6.492985971943888, 6.541082164328658, 6.589178356713427, 6.637274549098197, 6.6853707414829655, 6.733466933867735, 6.781563126252505, 6.829659318637274, 6.877755511022044, 6.925851703406813, 6.973947895791583, 7.022044088176353, 7.070140280561122, 7.118236472945892, 7.166332665330661, 7.214428857715431, 7.2625250501002006, 7.31062124248497, 7.35871743486974, 7.406813627254509, 7.454909819639279, 7.5030060120240485, 7.551102204408818, 7.599198396793587, 7.647294589178356, 7.695390781563126, 7.7434869739478955, 7.791583166332665, 7.839679358717435, 7.887775551102204, 7.935871743486974, 7.9839679358717435, 8.032064128256513, 8.080160320641282, 8.128256513026052, 8.176352705410821, 8.224448897795591, 8.27254509018036, 8.32064128256513, 8.3687374749499, 8.41683366733467, 8.464929859719438, 8.513026052104209, 8.561122244488978, 8.609218436873748, 8.657314629258517, 8.705410821643287, 8.753507014028056, 8.801603206412826, 8.849699398797595, 8.897795591182364, 8.945891783567134, 8.993987975951903, 9.042084168336673, 9.090180360721442, 9.138276553106213, 9.186372745490981, 9.234468937875752, 9.28256513026052, 9.330661322645291, 9.37875751503006, 9.42685370741483, 9.474949899799599, 9.52304609218437, 9.571142284569138, 9.619238476953909, 9.667334669338677, 9.715430861723448, 9.763527054108216, 9.811623246492985, 9.859719438877756, 9.907815631262524, 9.955911823647295, 10.004008016032063, 10.052104208416834, 10.100200400801603, 10.148296593186373, 10.196392785571142, 10.244488977955912, 10.292585170340681, 10.340681362725451, 10.38877755511022, 10.43687374749499, 10.48496993987976, 10.53306613226453, 10.581162324649299, 10.629258517034069, 10.677354709418838, 10.725450901803606, 10.773547094188377, 10.821643286573146, 10.869739478957916, 10.917835671342685, 10.965931863727455, 11.014028056112224, 11.062124248496994, 11.110220440881763, 11.158316633266534, 11.206412825651302, 11.254509018036073, 11.302605210420841, 11.350701402805612, 11.39879759519038, 11.446893787575151, 11.49498997995992, 11.54308617234469, 11.591182364729459, 11.639278557114228, 11.687374749498998, 11.735470941883767, 11.783567134268537, 11.831663326653306, 11.879759519038076, 11.927855711422845, 11.975951903807616, 12.024048096192384, 12.072144288577155, 12.120240480961924, 12.168336673346694, 12.216432865731463, 12.264529058116233, 12.312625250501002, 12.360721442885772, 12.408817635270541, 12.45691382765531, 12.50501002004008, 12.553106212424849, 12.60120240480962, 12.649298597194388, 12.697394789579159, 12.745490981963927, 12.793587174348698, 12.841683366733466, 12.889779559118237, 12.937875751503006, 12.985971943887776, 13.034068136272545, 13.082164328657315, 13.130260521042084, 13.178356713426854, 13.226452905811623, 13.274549098196394, 13.322645290581162, 13.370741482965931, 13.418837675350701, 13.46693386773547, 13.51503006012024, 13.56312625250501, 13.61122244488978, 13.659318637274549, 13.707414829659319, 13.755511022044088, 13.803607214428858, 13.851703406813627, 13.899799599198397, 13.947895791583166, 13.995991983967937, 14.044088176352705, 14.092184368737476, 14.140280561122244, 14.188376753507015, 14.236472945891784, 14.284569138276552, 14.332665330661323, 14.380761523046091, 14.428857715430862, 14.47695390781563, 14.525050100200401, 14.57314629258517, 14.62124248496994, 14.669338677354709, 14.71743486973948, 14.765531062124248, 14.813627254509019, 14.861723446893787, 14.909819639278558, 14.957915831663327, 15.006012024048097, 15.054108216432866, 15.102204408817636, 15.150300601202405, 15.198396793587174, 15.246492985971944, 15.294589178356713, 15.342685370741483, 15.390781563126252, 15.438877755511022, 15.486973947895791, 15.535070140280562, 15.58316633266533, 15.6312625250501, 15.67935871743487, 15.72745490981964, 15.775551102204409, 15.823647294589179, 15.871743486973948, 15.919839679358718, 15.967935871743487, 16.016032064128257, 16.064128256513026, 16.112224448897795, 16.160320641282564, 16.208416833667336, 16.256513026052104, 16.304609218436873, 16.352705410821642, 16.400801603206414, 16.448897795591183, 16.49699398797595, 16.54509018036072, 16.593186372745492, 16.64128256513026, 16.68937875751503, 16.7374749498998, 16.78557114228457, 16.83366733466934, 16.881763527054108, 16.929859719438877, 16.977955911823646, 17.026052104208418, 17.074148296593187, 17.122244488977955, 17.170340681362724, 17.218436873747496, 17.266533066132265, 17.314629258517034, 17.362725450901802, 17.410821643286575, 17.458917835671343, 17.507014028056112, 17.55511022044088, 17.603206412825653, 17.65130260521042, 17.69939879759519, 17.74749498997996, 17.795591182364728, 17.8436873747495, 17.89178356713427, 17.939879759519037, 17.987975951903806, 18.03607214428858, 18.084168336673347, 18.132264529058116, 18.180360721442884, 18.228456913827657, 18.276553106212425, 18.324649298597194, 18.372745490981963, 18.420841683366735, 18.468937875751504, 18.517034068136272, 18.56513026052104, 18.613226452905813, 18.661322645290582, 18.70941883767535, 18.75751503006012, 18.805611222444888, 18.85370741482966, 18.90180360721443, 18.949899799599198, 18.997995991983966, 19.04609218436874, 19.094188376753507, 19.142284569138276, 19.190380761523045, 19.238476953907817, 19.286573146292586, 19.334669338677354, 19.382765531062123, 19.430861723446895, 19.478957915831664, 19.527054108216433, 19.5751503006012, 19.62324649298597, 19.671342685370742, 19.71943887775551, 19.76753507014028, 19.81563126252505, 19.86372745490982, 19.91182364729459, 19.95991983967936, 20.008016032064127, 20.0561122244489, 20.104208416833668, 20.152304609218437, 20.200400801603205, 20.248496993987978, 20.296593186372746, 20.344689378757515, 20.392785571142284, 20.440881763527056, 20.488977955911825, 20.537074148296593, 20.585170340681362, 20.63326653306613, 20.681362725450903, 20.72945891783567, 20.77755511022044, 20.82565130260521, 20.87374749498998, 20.92184368737475, 20.96993987975952, 21.018036072144287, 21.06613226452906, 21.11422845691383, 21.162324649298597, 21.210420841683366, 21.258517034068138, 21.306613226452907, 21.354709418837675, 21.402805611222444, 21.450901803607213, 21.498997995991985, 21.547094188376754, 21.595190380761522, 21.64328657314629, 21.691382765531063, 21.739478957915832, 21.7875751503006, 21.83567134268537, 21.88376753507014, 21.93186372745491, 21.97995991983968, 22.028056112224448, 22.07615230460922, 22.12424849699399, 22.172344689378757, 22.220440881763526, 22.268537074148295, 22.316633266533067, 22.364729458917836, 22.412825651302605, 22.460921843687373, 22.509018036072145, 22.557114228456914, 22.605210420841683, 22.65330661322645, 22.701402805611224, 22.749498997995993, 22.79759519038076, 22.84569138276553, 22.893787575150302, 22.94188376753507, 22.98997995991984, 23.03807615230461, 23.08617234468938, 23.13426853707415, 23.182364729458918, 23.230460921843687, 23.278557114228455, 23.326653306613228, 23.374749498997996, 23.422845691382765, 23.470941883767534, 23.519038076152306, 23.567134268537075, 23.615230460921843, 23.663326653306612, 23.711422845691384, 23.759519038076153, 23.80761523046092, 23.85571142284569, 23.903807615230463, 23.95190380761523, 24.0])
+              .range(['#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fff261ff', '#fef161ff', '#fdf062ff', '#fcef62ff', '#fbef62ff', '#fbee62ff', '#faed63ff', '#f9ed63ff', '#f8ec63ff', '#f7eb63ff', '#f7eb63ff', '#f6ea64ff', '#f5e964ff', '#f4e864ff', '#f3e864ff', '#f3e765ff', '#f2e665ff', '#f1e665ff', '#f0e565ff', '#efe465ff', '#efe366ff', '#eee366ff', '#ede266ff', '#ece166ff', '#ebe167ff', '#ebe067ff', '#eadf67ff', '#e9df67ff', '#e8de67ff', '#e8dd68ff', '#e7dc68ff', '#e6dc68ff', '#e5db68ff', '#e4da69ff', '#e4da69ff', '#e3d969ff', '#e2d869ff', '#e1d869ff', '#e0d76aff', '#e0d66aff', '#dfd56aff', '#ded56aff', '#ddd46bff', '#dcd36bff', '#dcd36bff', '#dbd26bff', '#dad16cff', '#d9d06cff', '#d8d06cff', '#d8cf6cff', '#d7ce6cff', '#d6ce6dff', '#d5cd6dff', '#d4cc6dff', '#d4cc6dff', '#d3cb6eff', '#d2ca6eff', '#d1c96eff', '#d1c96eff', '#d0c86eff', '#cfc76fff', '#cec76fff', '#cdc66fff', '#cdc56fff', '#ccc570ff', '#cbc470ff', '#cac370ff', '#c9c270ff', '#c9c270ff', '#c8c171ff', '#c7c071ff', '#c6c071ff', '#c5bf71ff', '#c5be72ff', '#c4bd72ff', '#c3bd72ff', '#c2bc72ff', '#c1bb73ff', '#c1bb73ff', '#c0ba73ff', '#bfb973ff', '#beb973ff', '#beb874ff', '#bdb774ff', '#bcb674ff', '#bbb674ff', '#bab575ff', '#bab475ff', '#b9b475ff', '#b8b375ff', '#b7b275ff', '#b6b176ff', '#b6b176ff', '#b5b076ff', '#b4af76ff', '#b3af77ff', '#b2ae77ff', '#b2ad77ff', '#b1ad77ff', '#b0ac77ff', '#afab78ff', '#aeaa78ff', '#aeaa78ff', '#ada978ff', '#aca879ff', '#aba879ff', '#aaa779ff', '#aaa679ff', '#a9a679ff', '#a8a57aff', '#a7a47aff', '#a7a37aff', '#a6a37aff', '#a5a27bff', '#a4a17bff', '#a3a17bff', '#a3a07bff', '#a29f7cff', '#a19e7cff', '#a09e7cff', '#9f9d7cff', '#9f9c7cff', '#9e9c7dff', '#9d9b7dff', '#9c9a7dff', '#9b9a7dff', '#9b997eff', '#9a987eff', '#99977eff', '#98977eff', '#97967eff', '#97957fff', '#96957fff', '#95947fff', '#94937fff', '#939380ff', '#939280ff', '#929180ff', '#919080ff', '#909080ff', '#908f81ff', '#8f8e81ff', '#8e8e81ff', '#8d8d81ff', '#8c8c82ff', '#8c8b82ff', '#8b8b82ff', '#8a8a82ff', '#898983ff', '#888983ff', '#888883ff', '#878783ff', '#868783ff', '#858684ff', '#848584ff', '#848484ff', '#838484ff', '#828385ff', '#818285ff', '#808285ff', '#808185ff', '#7f8085ff', '#7e7f86ff', '#7d7f86ff', '#7d7e86ff', '#7c7d86ff', '#7b7d87ff', '#7a7c87ff', '#797b87ff', '#797b87ff', '#787a87ff', '#777988ff', '#767888ff', '#757888ff', '#757788ff', '#747689ff', '#737689ff', '#727589ff', '#717489ff', '#717489ff', '#70738aff', '#6f728aff', '#6e718aff', '#6d718aff', '#6d708bff', '#6c6f8bff', '#6b6f8bff', '#6a6e8bff', '#696d8cff', '#696c8cff', '#686c8cff', '#676b8cff', '#666a8cff', '#666a8dff', '#65698dff', '#64688dff', '#63688dff', '#62678eff', '#62668eff', '#61658eff', '#60658eff', '#5f648eff', '#5e638fff', '#5e638fff', '#5d628fff', '#5c618fff', '#5b6190ff', '#5a6090ff', '#5a5f90ff', '#595e90ff', '#585e90ff', '#575d91ff', '#565c91ff', '#565c91ff', '#555b91ff', '#545a92ff', '#535992ff', '#525992ff', '#525892ff', '#515793ff', '#505793ff', '#4f5693ff', '#4f5593ff', '#4e5593ff', '#4d5494ff', '#4c5394ff', '#4b5294ff', '#4b5294ff', '#4a5195ff', '#495095ff', '#485095ff', '#474f95ff', '#474e95ff', '#464e96ff', '#454d96ff', '#444c96ff', '#434b96ff', '#434b97ff', '#424a97ff', '#414997ff', '#404997ff', '#3f4897ff', '#3f4798ff', '#3e4698ff', '#3d4698ff', '#3c4598ff', '#3c4499ff', '#3b4499ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff', '#3a4399ff']);
+    
+
+    color_map_7652440af5f24586b977e0b31981db17.x = d3.scale.linear()
+              .domain([0.0, 24.0])
+              .range([0, 400]);
+
+    color_map_7652440af5f24586b977e0b31981db17.legend = L.control({position: 'topright'});
+    color_map_7652440af5f24586b977e0b31981db17.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_7652440af5f24586b977e0b31981db17.legend.addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+
+    color_map_7652440af5f24586b977e0b31981db17.xAxis = d3.svg.axis()
+        .scale(color_map_7652440af5f24586b977e0b31981db17.x)
+        .orient("top")
+        .tickSize(1)
+        .tickValues([6, 18]);
+
+    color_map_7652440af5f24586b977e0b31981db17.svg = d3.select(".legend.leaflet-control").append("svg")
+        .attr("id", 'legend')
+        .attr("width", 450)
+        .attr("height", 40);
+
+    color_map_7652440af5f24586b977e0b31981db17.g = color_map_7652440af5f24586b977e0b31981db17.svg.append("g")
+        .attr("class", "key")
+        .attr("transform", "translate(25,16)");
+
+    color_map_7652440af5f24586b977e0b31981db17.g.selectAll("rect")
+        .data(color_map_7652440af5f24586b977e0b31981db17.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_7652440af5f24586b977e0b31981db17.x(color_map_7652440af5f24586b977e0b31981db17.color.domain()[i - 1]) : color_map_7652440af5f24586b977e0b31981db17.x.range()[0],
+            x1: i < color_map_7652440af5f24586b977e0b31981db17.color.domain().length ? color_map_7652440af5f24586b977e0b31981db17.x(color_map_7652440af5f24586b977e0b31981db17.color.domain()[i]) : color_map_7652440af5f24586b977e0b31981db17.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 10)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+
+    color_map_7652440af5f24586b977e0b31981db17.g.call(color_map_7652440af5f24586b977e0b31981db17.xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", 21)
+        .text('Time (hour)');
+    
+            var marker_cluster_39d51c3bbc5a46519608c8bf434c4589 = L.markerClusterGroup({});
+            map_9c8bb240b30c41b18aed2eb79c2d2dbd.addLayer(marker_cluster_39d51c3bbc5a46519608c8bf434c4589);
+            
+    
+            var circle_marker_427f160245fa44d69f33ff002c05d342 = L.circleMarker(
+                [21.028927, 105.850664],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#beb874ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_1160d7af324346d49adf537647df9a24 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_02e3c9705b9945a686aa38018e3f0941 = $(`<div id="html_02e3c9705b9945a686aa38018e3f0941" style="width: 100.0%; height: 100.0%;"><b>Tu truyen thong toi truyen thong. Trien lam dinh hang trong</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=ed04c004-3880-4b8a-a42c-557fecf22477_1604200310.jpg"></img><p>STT: 0</p></div>`)[0];
+                popup_1160d7af324346d49adf537647df9a24.setContent(html_02e3c9705b9945a686aa38018e3f0941);
+            
+
+            circle_marker_427f160245fa44d69f33ff002c05d342.bindPopup(popup_1160d7af324346d49adf537647df9a24)
+            ;
+
+            
+        
+    
+        circle_marker_427f160245fa44d69f33ff002c05d342.bindTooltip(
+            `<div>`
+            + `Tu truyen thong toi truyen thong. Trien lam dinh hang trong` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_ecba13d433284b95bd2ecfd01206dd28 = L.circleMarker(
+                [21.030251, 105.851064],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#beb874ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_06a309694d9247c0941d32b7fe91d12d = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_44894965d30f4813982ac7f5eaa5b01c = $(`<div id="html_44894965d30f4813982ac7f5eaa5b01c" style="width: 100.0%; height: 100.0%;"><b>Da hoa cuong</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=17624e2e-ad53-4ff4-88a6-0c4c59477381_1604199647.jpg"></img><p>STT: 1</p></div>`)[0];
+                popup_06a309694d9247c0941d32b7fe91d12d.setContent(html_44894965d30f4813982ac7f5eaa5b01c);
+            
+
+            circle_marker_ecba13d433284b95bd2ecfd01206dd28.bindPopup(popup_06a309694d9247c0941d32b7fe91d12d)
+            ;
+
+            
+        
+    
+        circle_marker_ecba13d433284b95bd2ecfd01206dd28.bindTooltip(
+            `<div>`
+            + `Da hoa cuong` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_19c70caa75e747c9bff53591637027bb = L.circleMarker(
+                [21.029061, 105.850922],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#cec76fff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_2fa01df23a3a428aad5f6891413795c4 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_1f28a4e722fa41a98f8fa0c1ec407c68 = $(`<div id="html_1f28a4e722fa41a98f8fa0c1ec407c68" style="width: 100.0%; height: 100.0%;"><b>Tuong vua le thai to</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=672dddc9-0423-4666-bd96-1c689baa22ef_1604199278.jpg"></img><p>STT: 2</p></div>`)[0];
+                popup_2fa01df23a3a428aad5f6891413795c4.setContent(html_1f28a4e722fa41a98f8fa0c1ec407c68);
+            
+
+            circle_marker_19c70caa75e747c9bff53591637027bb.bindPopup(popup_2fa01df23a3a428aad5f6891413795c4)
+            ;
+
+            
+        
+    
+        circle_marker_19c70caa75e747c9bff53591637027bb.bindTooltip(
+            `<div>`
+            + `Tuong vua le thai to` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_9e32fd8308704e8294c91392feb954aa = L.circleMarker(
+                [21.01208, 105.858787],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#9d9b7dff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_a545af7da3f048d7b141e84e16f40ed5 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_0205574b940246a6bf6fbe84cbe7d498 = $(`<div id="html_0205574b940246a6bf6fbe84cbe7d498" style="width: 100.0%; height: 100.0%;"><b>Rac ngap pho</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=3633bb7a-fd97-4a3a-bc6e-0b73c7655b6e_1603862777.jpg"></img><p>STT: 3</p></div>`)[0];
+                popup_a545af7da3f048d7b141e84e16f40ed5.setContent(html_0205574b940246a6bf6fbe84cbe7d498);
+            
+
+            circle_marker_9e32fd8308704e8294c91392feb954aa.bindPopup(popup_a545af7da3f048d7b141e84e16f40ed5)
+            ;
+
+            
+        
+    
+        circle_marker_9e32fd8308704e8294c91392feb954aa.bindTooltip(
+            `<div>`
+            + `Rac ngap pho` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_c88fe1f588f54a73a2c70965a094985a = L.circleMarker(
+                [21.017852, 105.858423],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#9d9b7dff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_f6ea9fe1fd2a4da4bafff3b73b280f0a = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_62261e0f3b954254b8a65a6456c0042d = $(`<div id="html_62261e0f3b954254b8a65a6456c0042d" style="width: 100.0%; height: 100.0%;"><b>San choi da duoc lat nen</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=3e6ee48a-71f9-4de3-a78f-83693866f041_1603862032.jpg"></img><p>STT: 4</p></div>`)[0];
+                popup_f6ea9fe1fd2a4da4bafff3b73b280f0a.setContent(html_62261e0f3b954254b8a65a6456c0042d);
+            
+
+            circle_marker_c88fe1f588f54a73a2c70965a094985a.bindPopup(popup_f6ea9fe1fd2a4da4bafff3b73b280f0a)
+            ;
+
+            
+        
+    
+        circle_marker_c88fe1f588f54a73a2c70965a094985a.bindTooltip(
+            `<div>`
+            + `San choi da duoc lat nen` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_f1439b7d4b3e450b91db8065c27e72bc = L.circleMarker(
+                [21.005356, 105.858204],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#5b6090ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_b9985ae5c518462b8fb470dcb74a9918 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_bf7bb6cffa18440295c27c495447fda5 = $(`<div id="html_bf7bb6cffa18440295c27c495447fda5" style="width: 100.0%; height: 100.0%;"><b>Xuong sat ven ho thanh nhan</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=65836752-a3e8-40f0-9579-4f44c76faca9_1602927023.jpg"></img><p>STT: 5</p></div>`)[0];
+                popup_b9985ae5c518462b8fb470dcb74a9918.setContent(html_bf7bb6cffa18440295c27c495447fda5);
+            
+
+            circle_marker_f1439b7d4b3e450b91db8065c27e72bc.bindPopup(popup_b9985ae5c518462b8fb470dcb74a9918)
+            ;
+
+            
+        
+    
+        circle_marker_f1439b7d4b3e450b91db8065c27e72bc.bindTooltip(
+            `<div>`
+            + `Xuong sat ven ho thanh nhan` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_1e303de65f7147dcafdfcf982d325d81 = L.circleMarker(
+                [21.004932, 105.857773],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#5b6090ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_ba1892a0cf1d4708842d5dd1eac95f12 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_221ef4b45bf34699bd06428e533024bf = $(`<div id="html_221ef4b45bf34699bd06428e533024bf" style="width: 100.0%; height: 100.0%;"><b>Cau ho Thanh Nhan</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=4bcbcf7a-581b-4a16-9ce5-6e632c34c3a0_1602926890.jpg"></img><p>STT: 6</p></div>`)[0];
+                popup_ba1892a0cf1d4708842d5dd1eac95f12.setContent(html_221ef4b45bf34699bd06428e533024bf);
+            
+
+            circle_marker_1e303de65f7147dcafdfcf982d325d81.bindPopup(popup_ba1892a0cf1d4708842d5dd1eac95f12)
+            ;
+
+            
+        
+    
+        circle_marker_1e303de65f7147dcafdfcf982d325d81.bindTooltip(
+            `<div>`
+            + `Cau ho Thanh Nhan` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_1219af4175b4437a8a30d6d8ab202bf9 = L.circleMarker(
+                [21.004361, 105.857762],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#5b6090ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_cc33f43b0f364863bad4c5a5d5074367 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_1d169c752b9a43598fa1d8a8b70d0c64 = $(`<div id="html_1d169c752b9a43598fa1d8a8b70d0c64" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=ab2ad34c-e456-4719-b4fe-7fe8f7082ae0_1602925667.jpg"></img><p>STT: 7</p></div>`)[0];
+                popup_cc33f43b0f364863bad4c5a5d5074367.setContent(html_1d169c752b9a43598fa1d8a8b70d0c64);
+            
+
+            circle_marker_1219af4175b4437a8a30d6d8ab202bf9.bindPopup(popup_cc33f43b0f364863bad4c5a5d5074367)
+            ;
+
+            
+        
+    
+        circle_marker_1219af4175b4437a8a30d6d8ab202bf9.bindTooltip(
+            `<div>`
+            + `ab2ad34c-e456-4719-b4fe-7fe8f7082ae0` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_f24ae4d9078944ac96f6427c0e935ca2 = L.circleMarker(
+                [21.002753, 105.858014],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#fff261ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_4d691f42e1b84908a019ad8547b63a93 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_72dc799e74e64507be57230afdcc419c = $(`<div id="html_72dc799e74e64507be57230afdcc419c" style="width: 100.0%; height: 100.0%;"><b>Toa nha mai chop</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=aff3e835-24d5-4025-b91e-7c8a70f2a4db_1602876193.jpg"></img><p>STT: 8</p></div>`)[0];
+                popup_4d691f42e1b84908a019ad8547b63a93.setContent(html_72dc799e74e64507be57230afdcc419c);
+            
+
+            circle_marker_f24ae4d9078944ac96f6427c0e935ca2.bindPopup(popup_4d691f42e1b84908a019ad8547b63a93)
+            ;
+
+            
+        
+    
+        circle_marker_f24ae4d9078944ac96f6427c0e935ca2.bindTooltip(
+            `<div>`
+            + `Toa nha mai chop` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_4ca39d4c7e914ec78a55f1682b5e969a = L.circleMarker(
+                [21.004426, 105.857662],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#5b6090ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_7992b688c31640ee80e61c2bece5267a = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_8543ff8b068b451a98c80aa80d6af909 = $(`<div id="html_8543ff8b068b451a98c80aa80d6af909" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=a038bc46-bbaa-46b1-a80b-961d0db8e590_1602839943.jpg"></img><p>STT: 9</p></div>`)[0];
+                popup_7992b688c31640ee80e61c2bece5267a.setContent(html_8543ff8b068b451a98c80aa80d6af909);
+            
+
+            circle_marker_4ca39d4c7e914ec78a55f1682b5e969a.bindPopup(popup_7992b688c31640ee80e61c2bece5267a)
+            ;
+
+            
+        
+    
+        circle_marker_4ca39d4c7e914ec78a55f1682b5e969a.bindTooltip(
+            `<div>`
+            + `a038bc46-bbaa-46b1-a80b-961d0db8e590` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_d663284966f84f7e895d386ca7ab9bc9 = L.circleMarker(
+                [21.00432, 105.85764],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#3a4399ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_2b0eadf20f4b4d89907e005eb9c5cf91 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_ff2c6a5f581a462390a336b2758bde37 = $(`<div id="html_ff2c6a5f581a462390a336b2758bde37" style="width: 100.0%; height: 100.0%;"><b>“Ban” tai Tuy Lounge</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=3e22bd4c-0b5a-4601-9d7c-0784455fce4e_1602500945.jpg"></img><p>STT: 10</p></div>`)[0];
+                popup_2b0eadf20f4b4d89907e005eb9c5cf91.setContent(html_ff2c6a5f581a462390a336b2758bde37);
+            
+
+            circle_marker_d663284966f84f7e895d386ca7ab9bc9.bindPopup(popup_2b0eadf20f4b4d89907e005eb9c5cf91)
+            ;
+
+            
+        
+    
+        circle_marker_d663284966f84f7e895d386ca7ab9bc9.bindTooltip(
+            `<div>`
+            + `“Ban” tai Tuy Lounge` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_5000a08c4b234d7a84e8133e5d85eb0c = L.circleMarker(
+                [21.027993, 105.853537],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#3a4399ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_57b391fea5da4485bde6e5ace427a3fb = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_f60d7eef9a7745dcb92ae245ac0c9692 = $(`<div id="html_f60d7eef9a7745dcb92ae245ac0c9692" style="width: 100.0%; height: 100.0%;"><b>Cot thong tin tai Ho Guom</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=b688c90b-1be5-48f8-8d4f-fb7160219800_1602429250.jpg"></img><p>STT: 11</p></div>`)[0];
+                popup_57b391fea5da4485bde6e5ace427a3fb.setContent(html_f60d7eef9a7745dcb92ae245ac0c9692);
+            
+
+            circle_marker_5000a08c4b234d7a84e8133e5d85eb0c.bindPopup(popup_57b391fea5da4485bde6e5ace427a3fb)
+            ;
+
+            
+        
+    
+        circle_marker_5000a08c4b234d7a84e8133e5d85eb0c.bindTooltip(
+            `<div>`
+            + `Cot thong tin tai Ho Guom` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_1548382e11854f65a8b540e5d492b93a = L.circleMarker(
+                [21.028016, 105.853478],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#3a4399ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_81abf4fd3b474661b5ccada516c8650d = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_782bf905357b4cf79ae2aa94da265e50 = $(`<div id="html_782bf905357b4cf79ae2aa94da265e50" style="width: 100.0%; height: 100.0%;"><b>Bot dien ho Guom</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=4a98913e-4b00-4cb0-b295-b281f120e0c3_1602429156.jpg"></img><p>STT: 12</p></div>`)[0];
+                popup_81abf4fd3b474661b5ccada516c8650d.setContent(html_782bf905357b4cf79ae2aa94da265e50);
+            
+
+            circle_marker_1548382e11854f65a8b540e5d492b93a.bindPopup(popup_81abf4fd3b474661b5ccada516c8650d)
+            ;
+
+            
+        
+    
+        circle_marker_1548382e11854f65a8b540e5d492b93a.bindTooltip(
+            `<div>`
+            + `Bot dien ho Guom` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_627486f5a0fd4c75b71109bcb372ff92 = L.circleMarker(
+                [21.010107, 105.815998],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#3a4399ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_3f1057b7566645659e989f76a5c5f3c6 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_7f08a1c7a55b40b4adebb684f31e0014 = $(`<div id="html_7f08a1c7a55b40b4adebb684f31e0014" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=58ae1bce-f9ac-40d3-9cd4-7e3ad7f1c07e_1602160436.jpg"></img><p>STT: 13</p></div>`)[0];
+                popup_3f1057b7566645659e989f76a5c5f3c6.setContent(html_7f08a1c7a55b40b4adebb684f31e0014);
+            
+
+            circle_marker_627486f5a0fd4c75b71109bcb372ff92.bindPopup(popup_3f1057b7566645659e989f76a5c5f3c6)
+            ;
+
+            
+        
+    
+        circle_marker_627486f5a0fd4c75b71109bcb372ff92.bindTooltip(
+            `<div>`
+            + `58ae1bce-f9ac-40d3-9cd4-7e3ad7f1c07e` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_85b007bbef484bd593df26c6436c209f = L.circleMarker(
+                [21.010089, 105.815886],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#3a4399ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_4272d24f40854b8c9c0a8c314cc8cdf6 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_fed983b59a64430cb9bb1d00d2b84ed7 = $(`<div id="html_fed983b59a64430cb9bb1d00d2b84ed7" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=57842ff6-5647-4d5c-b085-321384fb7ac0_1602160371.jpg"></img><p>STT: 14</p></div>`)[0];
+                popup_4272d24f40854b8c9c0a8c314cc8cdf6.setContent(html_fed983b59a64430cb9bb1d00d2b84ed7);
+            
+
+            circle_marker_85b007bbef484bd593df26c6436c209f.bindPopup(popup_4272d24f40854b8c9c0a8c314cc8cdf6)
+            ;
+
+            
+        
+    
+        circle_marker_85b007bbef484bd593df26c6436c209f.bindTooltip(
+            `<div>`
+            + `57842ff6-5647-4d5c-b085-321384fb7ac0` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_d8cf8e19847a456fbdad79c456337685 = L.circleMarker(
+                [21.016787, 105.857685],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#9d9b7dff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_7c22462669684635a2ded371732ed300 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_09de713b468c4d14bb7336f388057024 = $(`<div id="html_09de713b468c4d14bb7336f388057024" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=985e542e-674a-4e72-9e3d-634d8cf6cfc1_1602136298.jpg"></img><p>STT: 15</p></div>`)[0];
+                popup_7c22462669684635a2ded371732ed300.setContent(html_09de713b468c4d14bb7336f388057024);
+            
+
+            circle_marker_d8cf8e19847a456fbdad79c456337685.bindPopup(popup_7c22462669684635a2ded371732ed300)
+            ;
+
+            
+        
+    
+        circle_marker_d8cf8e19847a456fbdad79c456337685.bindTooltip(
+            `<div>`
+            + `985e542e-674a-4e72-9e3d-634d8cf6cfc1` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_ba65e8241eb04d8a8b3e83f75012bbf1 = L.circleMarker(
+                [21.017722, 105.858374],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#9d9b7dff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_2b618357a74a46d7ba03ac928112f1e5 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_749f488a79e24816bd5e91a8bc872964 = $(`<div id="html_749f488a79e24816bd5e91a8bc872964" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=bf7e21a8-76c6-41aa-a3c9-a466a50c080f_1602133728.jpg"></img><p>STT: 16</p></div>`)[0];
+                popup_2b618357a74a46d7ba03ac928112f1e5.setContent(html_749f488a79e24816bd5e91a8bc872964);
+            
+
+            circle_marker_ba65e8241eb04d8a8b3e83f75012bbf1.bindPopup(popup_2b618357a74a46d7ba03ac928112f1e5)
+            ;
+
+            
+        
+    
+        circle_marker_ba65e8241eb04d8a8b3e83f75012bbf1.bindTooltip(
+            `<div>`
+            + `bf7e21a8-76c6-41aa-a3c9-a466a50c080f` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_8400bdb4355947669537caa2026d5daa = L.circleMarker(
+                [21.018583, 105.858742],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#ada978ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_ac49a489580a4efd849cc1d4874435aa = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_0c14649827284c9095a534f837b79e88 = $(`<div id="html_0c14649827284c9095a534f837b79e88" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=cf31a681-a3a8-4369-9d9f-bdbc27a8ec3f_1601613955.jpg"></img><p>STT: 17</p></div>`)[0];
+                popup_ac49a489580a4efd849cc1d4874435aa.setContent(html_0c14649827284c9095a534f837b79e88);
+            
+
+            circle_marker_8400bdb4355947669537caa2026d5daa.bindPopup(popup_ac49a489580a4efd849cc1d4874435aa)
+            ;
+
+            
+        
+    
+        circle_marker_8400bdb4355947669537caa2026d5daa.bindTooltip(
+            `<div>`
+            + `cf31a681-a3a8-4369-9d9f-bdbc27a8ec3f` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_b1f9bcd6c9ea465c8e3e4650b6360d94 = L.circleMarker(
+                [16.063886, 108.246474],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#3a4399ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_94a37fe365144569bde86cc8ee526ef6 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_3d7558416a9e4d6cb94b052d6e5ad3d6 = $(`<div id="html_3d7558416a9e4d6cb94b052d6e5ad3d6" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=48ba610a-6bf9-40cb-aa46-8b4866ed04a7_1601465562.jpg"></img><p>STT: 18</p></div>`)[0];
+                popup_94a37fe365144569bde86cc8ee526ef6.setContent(html_3d7558416a9e4d6cb94b052d6e5ad3d6);
+            
+
+            circle_marker_b1f9bcd6c9ea465c8e3e4650b6360d94.bindPopup(popup_94a37fe365144569bde86cc8ee526ef6)
+            ;
+
+            
+        
+    
+        circle_marker_b1f9bcd6c9ea465c8e3e4650b6360d94.bindTooltip(
+            `<div>`
+            + `48ba610a-6bf9-40cb-aa46-8b4866ed04a7` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_25c0310e6ca4488399e35edd9d124ffa = L.circleMarker(
+                [15.957893, 108.506561],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#fff261ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_cd26c1b84e57457f8466c47eed6fd9e9 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_03bab8d962b64e1f9c23084785635a13 = $(`<div id="html_03bab8d962b64e1f9c23084785635a13" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=5c743312-6b99-4db1-8777-bf82db8d39e0_1601337038.jpg"></img><p>STT: 19</p></div>`)[0];
+                popup_cd26c1b84e57457f8466c47eed6fd9e9.setContent(html_03bab8d962b64e1f9c23084785635a13);
+            
+
+            circle_marker_25c0310e6ca4488399e35edd9d124ffa.bindPopup(popup_cd26c1b84e57457f8466c47eed6fd9e9)
+            ;
+
+            
+        
+    
+        circle_marker_25c0310e6ca4488399e35edd9d124ffa.bindTooltip(
+            `<div>`
+            + `5c743312-6b99-4db1-8777-bf82db8d39e0` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_0af2264a537b449c914ea2745c59c650 = L.circleMarker(
+                [15.956555, 108.507381],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#6b6f8bff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_fe1cd8d6cf3d4c4c951297ef59174c35 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_7656f6adb7d742b7a2aacc1d22952f83 = $(`<div id="html_7656f6adb7d742b7a2aacc1d22952f83" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=18d7ae40-6733-4487-b724-0713b9030186_1601107508.jpg"></img><p>STT: 20</p></div>`)[0];
+                popup_fe1cd8d6cf3d4c4c951297ef59174c35.setContent(html_7656f6adb7d742b7a2aacc1d22952f83);
+            
+
+            circle_marker_0af2264a537b449c914ea2745c59c650.bindPopup(popup_fe1cd8d6cf3d4c4c951297ef59174c35)
+            ;
+
+            
+        
+    
+        circle_marker_0af2264a537b449c914ea2745c59c650.bindTooltip(
+            `<div>`
+            + `18d7ae40-6733-4487-b724-0713b9030186` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_11f82b48b21047f6b252f8bc035c3854 = L.circleMarker(
+                [15.956969, 108.507086],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#7c7d86ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_8604d88ad8f649e9b7e1fb7236285db1 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_ba440ddc6a0843f98fcc93cb62f14bda = $(`<div id="html_ba440ddc6a0843f98fcc93cb62f14bda" style="width: 100.0%; height: 100.0%;"><b>Di tich mieu Hiep Hoa</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=3affeba9-2dee-44cb-9efe-0caded957d01_1601106280.jpg"></img><p>STT: 21</p></div>`)[0];
+                popup_8604d88ad8f649e9b7e1fb7236285db1.setContent(html_ba440ddc6a0843f98fcc93cb62f14bda);
+            
+
+            circle_marker_11f82b48b21047f6b252f8bc035c3854.bindPopup(popup_8604d88ad8f649e9b7e1fb7236285db1)
+            ;
+
+            
+        
+    
+        circle_marker_11f82b48b21047f6b252f8bc035c3854.bindTooltip(
+            `<div>`
+            + `Di tich mieu Hiep Hoa` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_aa8d246c52b04c2fa96cfb9b49d92ce8 = L.circleMarker(
+                [15.880263, 108.327784],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#beb874ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_0e6718236e5e478aa35709e2aacbbac6 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_2af407a75e574a0fb3244934c8ddd2ec = $(`<div id="html_2af407a75e574a0fb3244934c8ddd2ec" style="width: 100.0%; height: 100.0%;"><b>Quan che re</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=2c70922b-4117-4d7d-b9fa-287009c4f65f_1601091194.jpg"></img><p>STT: 22</p></div>`)[0];
+                popup_0e6718236e5e478aa35709e2aacbbac6.setContent(html_2af407a75e574a0fb3244934c8ddd2ec);
+            
+
+            circle_marker_aa8d246c52b04c2fa96cfb9b49d92ce8.bindPopup(popup_0e6718236e5e478aa35709e2aacbbac6)
+            ;
+
+            
+        
+    
+        circle_marker_aa8d246c52b04c2fa96cfb9b49d92ce8.bindTooltip(
+            `<div>`
+            + `Quan che re` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_4383c167b9b54c8591331cb11203b3bb = L.circleMarker(
+                [15.877447, 108.330882],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#beb874ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_7e95c5014ffb402db9f0fdd20bc1ec53 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_9661488ce3c94228b17a7d93fdd78af2 = $(`<div id="html_9661488ce3c94228b17a7d93fdd78af2" style="width: 100.0%; height: 100.0%;"><b>Gian hoa giay</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=21923acd-d808-452d-ad58-5b350dbca1e8_1601090532.jpg"></img><p>STT: 23</p></div>`)[0];
+                popup_7e95c5014ffb402db9f0fdd20bc1ec53.setContent(html_9661488ce3c94228b17a7d93fdd78af2);
+            
+
+            circle_marker_4383c167b9b54c8591331cb11203b3bb.bindPopup(popup_7e95c5014ffb402db9f0fdd20bc1ec53)
+            ;
+
+            
+        
+    
+        circle_marker_4383c167b9b54c8591331cb11203b3bb.bindTooltip(
+            `<div>`
+            + `Gian hoa giay` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_bd095b8051ee405db384cd9f49e31f61 = L.circleMarker(
+                [15.877451, 108.330813],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#beb874ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_5113f890ed294c7bba1db2cb86cf3fcc = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_4ae519bea65a475fba11dbeadc43b06d = $(`<div id="html_4ae519bea65a475fba11dbeadc43b06d" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=95dc4216-09ae-4bcf-ab53-58c0a06f22e3_1601090522.jpg"></img><p>STT: 24</p></div>`)[0];
+                popup_5113f890ed294c7bba1db2cb86cf3fcc.setContent(html_4ae519bea65a475fba11dbeadc43b06d);
+            
+
+            circle_marker_bd095b8051ee405db384cd9f49e31f61.bindPopup(popup_5113f890ed294c7bba1db2cb86cf3fcc)
+            ;
+
+            
+        
+    
+        circle_marker_bd095b8051ee405db384cd9f49e31f61.bindTooltip(
+            `<div>`
+            + `95dc4216-09ae-4bcf-ab53-58c0a06f22e3` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_6f7da3eb549e4531b3b00bdbe6abf916 = L.circleMarker(
+                [15.877108, 108.32762],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#cec76fff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_11c8c417010d4f47930a3def0f4ec31e = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_2e0929cc4676489daa9ab58839413cd7 = $(`<div id="html_2e0929cc4676489daa9ab58839413cd7" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=6f5f268a-ef74-4f69-98a7-6911eee4ae14_1601089072.jpg"></img><p>STT: 25</p></div>`)[0];
+                popup_11c8c417010d4f47930a3def0f4ec31e.setContent(html_2e0929cc4676489daa9ab58839413cd7);
+            
+
+            circle_marker_6f7da3eb549e4531b3b00bdbe6abf916.bindPopup(popup_11c8c417010d4f47930a3def0f4ec31e)
+            ;
+
+            
+        
+    
+        circle_marker_6f7da3eb549e4531b3b00bdbe6abf916.bindTooltip(
+            `<div>`
+            + `6f5f268a-ef74-4f69-98a7-6911eee4ae14` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_e57eb973b5554284bb7a286a9f1e4b49 = L.circleMarker(
+                [15.877149, 108.327657],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#cec76fff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_76dd928a08a345c6a2afc71d9e755784 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_7c56116ec91c454bae84fe5d914364a4 = $(`<div id="html_7c56116ec91c454bae84fe5d914364a4" style="width: 100.0%; height: 100.0%;"><b>142 Tran Phu Hoi An</b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=68a96402-55b5-41ba-b84a-6ce15941f079_1601089062.jpg"></img><p>STT: 26</p></div>`)[0];
+                popup_76dd928a08a345c6a2afc71d9e755784.setContent(html_7c56116ec91c454bae84fe5d914364a4);
+            
+
+            circle_marker_e57eb973b5554284bb7a286a9f1e4b49.bindPopup(popup_76dd928a08a345c6a2afc71d9e755784)
+            ;
+
+            
+        
+    
+        circle_marker_e57eb973b5554284bb7a286a9f1e4b49.bindTooltip(
+            `<div>`
+            + `142 Tran Phu Hoi An` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_07db36c73fc14e6c9da093978923c1c4 = L.circleMarker(
+                [15.877832, 108.331152],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#dfd56aff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_b55cd7fb82ad4bc29cbeaf834b310ed4 = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_1f2426dfd5994b39a6fa8e5e2cf7501e = $(`<div id="html_1f2426dfd5994b39a6fa8e5e2cf7501e" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=e68eb2f0-7072-49d7-b94e-6021f7d3a15c_1601084712.jpg"></img><p>STT: 27</p></div>`)[0];
+                popup_b55cd7fb82ad4bc29cbeaf834b310ed4.setContent(html_1f2426dfd5994b39a6fa8e5e2cf7501e);
+            
+
+            circle_marker_07db36c73fc14e6c9da093978923c1c4.bindPopup(popup_b55cd7fb82ad4bc29cbeaf834b310ed4)
+            ;
+
+            
+        
+    
+        circle_marker_07db36c73fc14e6c9da093978923c1c4.bindTooltip(
+            `<div>`
+            + `e68eb2f0-7072-49d7-b94e-6021f7d3a15c` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_d9973a96ad02457f949c50d633a5496c = L.circleMarker(
+                [15.879977, 108.327646],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#efe466ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_6e35f7cd5edf452b8f3991ce9f015c2b = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_d1aa482f3ca04095a3d5bfe5e509a7d4 = $(`<div id="html_d1aa482f3ca04095a3d5bfe5e509a7d4" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=e8a9122f-94cb-40d7-9df2-a1f0f819cac5_1601080626.jpg"></img><p>STT: 28</p></div>`)[0];
+                popup_6e35f7cd5edf452b8f3991ce9f015c2b.setContent(html_d1aa482f3ca04095a3d5bfe5e509a7d4);
+            
+
+            circle_marker_d9973a96ad02457f949c50d633a5496c.bindPopup(popup_6e35f7cd5edf452b8f3991ce9f015c2b)
+            ;
+
+            
+        
+    
+        circle_marker_d9973a96ad02457f949c50d633a5496c.bindTooltip(
+            `<div>`
+            + `e8a9122f-94cb-40d7-9df2-a1f0f819cac5` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_a318ee5476fc4d2e86cd9b1f37078826 = L.circleMarker(
+                [15.877926, 108.326747],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#3a4399ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_f9c5afe5d7724fb4b9f3521c84ea721c = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_6ba40eafb9fb41338abbc851fd531069 = $(`<div id="html_6ba40eafb9fb41338abbc851fd531069" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=394c44db-a84f-44f9-903a-90448526598a_1601043282.jpg"></img><p>STT: 29</p></div>`)[0];
+                popup_f9c5afe5d7724fb4b9f3521c84ea721c.setContent(html_6ba40eafb9fb41338abbc851fd531069);
+            
+
+            circle_marker_a318ee5476fc4d2e86cd9b1f37078826.bindPopup(popup_f9c5afe5d7724fb4b9f3521c84ea721c)
+            ;
+
+            
+        
+    
+        circle_marker_a318ee5476fc4d2e86cd9b1f37078826.bindTooltip(
+            `<div>`
+            + `394c44db-a84f-44f9-903a-90448526598a` + `</div>`,
+            {"sticky": true}
+        );
+        
+    
+            var circle_marker_b2576c99409f4cbf9709e2f5ea01fcb0 = L.circleMarker(
+                [15.876612, 108.326489],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#3a4399ff",
+  "fillOpacity": 1,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10,
+  "stroke": false,
+  "weight": 3
+}
+                )
+                .addTo(map_9c8bb240b30c41b18aed2eb79c2d2dbd);
+            
+    
+            var popup_c7c5a3b3fd7948dbbb6b97b2bbc09fcc = L.popup({maxWidth: '100%'
+            
+            });
+
+            
+                var html_be436a75035e49788be6a7ac732878c2 = $(`<div id="html_be436a75035e49788be6a7ac732878c2" style="width: 100.0%; height: 100.0%;"><b></b><img src="https://five.epicollect.net/api/media/street-interesting-point?type=photo&format=entry_thumb&name=07716715-02d8-484c-a606-66ee42124f0d_1601041259.jpg"></img><p>STT: 30</p></div>`)[0];
+                popup_c7c5a3b3fd7948dbbb6b97b2bbc09fcc.setContent(html_be436a75035e49788be6a7ac732878c2);
+            
+
+            circle_marker_b2576c99409f4cbf9709e2f5ea01fcb0.bindPopup(popup_c7c5a3b3fd7948dbbb6b97b2bbc09fcc)
+            ;
+
+            
+        
+    
+        circle_marker_b2576c99409f4cbf9709e2f5ea01fcb0.bindTooltip(
+            `<div>`
+            + `07716715-02d8-484c-a606-66ee42124f0d` + `</div>`,
+            {"sticky": true}
+        );
+        
+</script>
